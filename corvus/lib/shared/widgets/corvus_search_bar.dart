@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class CorvusSearchBar extends StatelessWidget {
@@ -10,6 +10,7 @@ class CorvusSearchBar extends StatelessWidget {
   final VoidCallback? onTap;
   final String? hintText;
   final bool enabled;
+  final bool autofocus;
 
   const CorvusSearchBar({
     super.key,
@@ -18,6 +19,7 @@ class CorvusSearchBar extends StatelessWidget {
     this.onTap,
     this.hintText = 'Search notes, memories, reminders...',
     this.enabled = true,
+    this.autofocus = false,
   });
 
   @override
@@ -25,29 +27,26 @@ class CorvusSearchBar extends StatelessWidget {
     return Container(
       height: Dimensions.inputHeight,
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
-        borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-        border: Border.all(color: AppColors.border),
+        color: context.cp.surface,
+        borderRadius: BorderRadius.circular(Dimensions.radiusSm),
       ),
       child: TextField(
         controller: controller,
         onChanged: onChanged,
         onTap: onTap,
         enabled: enabled,
+        autofocus: autofocus,
         style: Theme.of(context).textTheme.bodyLarge,
         decoration: InputDecoration(
           hintText: hintText,
-          prefixIcon: const Padding(
-            padding: EdgeInsets.all(Spacing.md),
-            child: Icon(LucideIcons.search, size: 20, color: AppColors.textTertiary),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(Spacing.md),
+            child: Icon(LucideIcons.search, size: 18, color: context.cp.textTertiary),
           ),
           border: InputBorder.none,
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: Spacing.lg,
-            vertical: Spacing.md,
-          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: Spacing.lg, vertical: Spacing.md),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 
 class CorvusBottomSheet {
   static Future<T?> show<T>({
@@ -11,7 +11,7 @@ class CorvusBottomSheet {
   }) {
     return showModalBottomSheet<T>(
       context: context,
-      backgroundColor: AppColors.surface,
+      backgroundColor: context.cp.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(Dimensions.radiusXl),
@@ -28,7 +28,7 @@ class CorvusBottomSheet {
                   width: 36,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: AppColors.textTertiary.withValues(alpha: 0.3),
+                    color: context.cp.textTertiary.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(2),
                   ),
                   margin: const EdgeInsets.only(bottom: Spacing.xl),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 enum SkeletonType { card, listItem, chatBubble, reminder, circle }
@@ -18,41 +18,41 @@ class LoadingSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: AppColors.shimmerBase,
-      highlightColor: AppColors.shimmerHighlight,
+      baseColor: context.cp.shimmerBase,
+      highlightColor: context.cp.shimmerHighlight,
       child: Column(
         children: List.generate(count, (index) {
           switch (type) {
             case SkeletonType.card:
-              return _buildCardSkeleton();
+              return _buildCardSkeleton(context);
             case SkeletonType.listItem:
-              return _buildListItemSkeleton();
+              return _buildListItemSkeleton(context);
             case SkeletonType.chatBubble:
-              return _buildChatBubbleSkeleton(index);
+              return _buildChatBubbleSkeleton(context, index);
             case SkeletonType.reminder:
-              return _buildReminderSkeleton();
+              return _buildReminderSkeleton(context);
             case SkeletonType.circle:
-              return _buildCircleSkeleton();
+              return _buildCircleSkeleton(context);
           }
         }),
       ),
     );
   }
 
-  Widget _buildCardSkeleton() {
+  Widget _buildCardSkeleton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
         height: 100,
         decoration: BoxDecoration(
-          color: AppColors.shimmerBase,
+          color: context.cp.shimmerBase,
           borderRadius: BorderRadius.circular(Dimensions.radiusMd),
         ),
       ),
     );
   }
 
-  Widget _buildListItemSkeleton() {
+  Widget _buildListItemSkeleton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -60,8 +60,8 @@ class LoadingSkeleton extends StatelessWidget {
           Container(
             width: 40,
             height: 40,
-            decoration: const BoxDecoration(
-              color: AppColors.shimmerBase,
+            decoration: BoxDecoration(
+              color: context.cp.shimmerBase,
               shape: BoxShape.circle,
             ),
           ),
@@ -74,7 +74,7 @@ class LoadingSkeleton extends StatelessWidget {
                   height: 14,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: AppColors.shimmerBase,
+                    color: context.cp.shimmerBase,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -83,7 +83,7 @@ class LoadingSkeleton extends StatelessWidget {
                   height: 10,
                   width: 150,
                   decoration: BoxDecoration(
-                    color: AppColors.shimmerBase,
+                    color: context.cp.shimmerBase,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -95,7 +95,7 @@ class LoadingSkeleton extends StatelessWidget {
     );
   }
 
-  Widget _buildChatBubbleSkeleton(int index) {
+  Widget _buildChatBubbleSkeleton(BuildContext context, int index) {
     final isRight = index.isEven;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -106,7 +106,7 @@ class LoadingSkeleton extends StatelessWidget {
             width: 200,
             height: 60,
             decoration: BoxDecoration(
-              color: AppColors.shimmerBase,
+              color: context.cp.shimmerBase,
               borderRadius: BorderRadius.circular(Dimensions.radiusMd),
             ),
           ),
@@ -115,27 +115,27 @@ class LoadingSkeleton extends StatelessWidget {
     );
   }
 
-  Widget _buildReminderSkeleton() {
+  Widget _buildReminderSkeleton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
         height: 64,
         decoration: BoxDecoration(
-          color: AppColors.shimmerBase,
+          color: context.cp.shimmerBase,
           borderRadius: BorderRadius.circular(Dimensions.radiusMd),
         ),
       ),
     );
   }
 
-  Widget _buildCircleSkeleton() {
+  Widget _buildCircleSkeleton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
         width: 56,
         height: 56,
-        decoration: const BoxDecoration(
-          color: AppColors.shimmerBase,
+        decoration: BoxDecoration(
+          color: context.cp.shimmerBase,
           shape: BoxShape.circle,
         ),
       ),

@@ -5,7 +5,6 @@ import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/shared/widgets/corvus_search_bar.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
-
 import 'package:corvus/shared/widgets/memory_card.dart';
 import 'package:corvus/features/notes/widgets/note_tile.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -16,28 +15,18 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Spacing.sm, Spacing.md, Spacing.sm, Spacing.md,
-              ),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  const Expanded(
-                    child: CorvusSearchBar(
-                      hintText: 'Search anything...',
-                    ),
-                  ),
-                ],
-              ),
+              padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.lg, Spacing.lg, Spacing.md),
+              child: Text('Search', style: AppTextStyles.displaySmall),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
+              child: CorvusSearchBar(hintText: 'Search anything...'),
+            ),
+            const SizedBox(height: Spacing.md),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
               child: Row(
@@ -111,9 +100,7 @@ class SearchScreen extends StatelessWidget {
 
   Widget _filterChip(String label, bool isSelected) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Spacing.lg, vertical: Spacing.sm,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: Spacing.lg, vertical: Spacing.sm),
       decoration: BoxDecoration(
         color: isSelected ? AppColors.primary : AppColors.surfaceVariant,
         borderRadius: BorderRadius.circular(Dimensions.radiusFull),

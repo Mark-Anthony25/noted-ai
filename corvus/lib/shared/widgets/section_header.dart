@@ -17,11 +17,7 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: Spacing.lg,
-        right: Spacing.lg,
-        bottom: Spacing.md,
-      ),
+      padding: const EdgeInsets.only(left: Spacing.lg, right: Spacing.lg, bottom: Spacing.md),
       child: Row(
         children: [
           Text(title, style: AppTextStyles.titleLarge),
@@ -29,12 +25,7 @@ class SectionHeader extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: onAction,
-              child: Text(
-                actionLabel!,
-                style: AppTextStyles.labelMedium.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
+              child: Text(actionLabel!, style: AppTextStyles.labelMedium.copyWith(color: Theme.of(context).colorScheme.primary)),
             ),
           ],
         ],

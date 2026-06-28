@@ -32,35 +32,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(Spacing.xxl),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: Spacing.page),
-              Text(
-                'Create account',
-                style: AppTextStyles.displayMedium,
-              ),
+              const SizedBox(height: Spacing.section),
+              Text('Create account', style: AppTextStyles.displayMedium),
               const SizedBox(height: Spacing.sm),
-              Text(
-                'Start your journey with Corvus',
-                style: AppTextStyles.bodyLarge.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
+              Text('Start your journey with Corvus', style: AppTextStyles.bodyMedium),
               const SizedBox(height: Spacing.xxxxl),
               CorvusTextField(
                 label: 'Full Name',
                 hintText: 'Alex Chen',
                 controller: _nameController,
-                prefixIcon: const Icon(
-                  LucideIcons.user,
-                  size: 18,
-                  color: AppColors.textTertiary,
-                ),
+                prefixIcon: const Icon(LucideIcons.user, size: 16, color: AppColors.textTertiary),
               ),
               const SizedBox(height: Spacing.xl),
               CorvusTextField(
@@ -68,11 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'alex@corvus.app',
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(
-                  LucideIcons.mail,
-                  size: 18,
-                  color: AppColors.textTertiary,
-                ),
+                prefixIcon: const Icon(LucideIcons.mail, size: 16, color: AppColors.textTertiary),
               ),
               const SizedBox(height: Spacing.xl),
               CorvusTextField(
@@ -80,72 +63,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'Create a strong password',
                 controller: _passwordController,
                 isPassword: _obscurePassword,
-                prefixIcon: const Icon(
-                  LucideIcons.lock,
-                  size: 18,
-                  color: AppColors.textTertiary,
-                ),
+                prefixIcon: const Icon(LucideIcons.lock, size: 16, color: AppColors.textTertiary),
                 suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscurePassword ? LucideIcons.eyeOff : LucideIcons.eye,
-                    size: 18,
-                    color: AppColors.textTertiary,
-                  ),
-                  onPressed: () {
-                    setState(() => _obscurePassword = !_obscurePassword);
-                  },
+                  icon: Icon(_obscurePassword ? LucideIcons.eyeOff : LucideIcons.eye, size: 16, color: AppColors.textTertiary),
+                  onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                 ),
                 helperText: 'Must be at least 8 characters',
               ),
               const SizedBox(height: Spacing.xxl),
-              CorvusButton(
-                label: 'Create Account',
-                onPressed: () => context.go('/home'),
-              ),
+              CorvusButton(label: 'Create Account', onPressed: () => context.go('/home')),
               const SizedBox(height: Spacing.xxl),
               Row(
                 children: [
                   const Expanded(child: Divider()),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Spacing.lg,
-                    ),
-                    child: Text(
-                      'or continue with',
-                      style: AppTextStyles.labelSmall,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
+                    child: Text('or continue with', style: AppTextStyles.caption),
                   ),
                   const Expanded(child: Divider()),
                 ],
               ),
               const SizedBox(height: Spacing.xl),
-              _socialButton(
-                icon: LucideIcons.monitor,
-                label: 'Google',
-                onPressed: () => context.go('/home'),
-              ),
+              _socialButton(LucideIcons.monitor, 'Google', () => context.go('/home')),
               const SizedBox(height: Spacing.sm),
-              _socialButton(
-                icon: LucideIcons.apple,
-                label: 'Apple',
-                onPressed: () => context.go('/home'),
-              ),
+              _socialButton(LucideIcons.apple, 'Apple', () => context.go('/home')),
               const SizedBox(height: Spacing.xxxxl),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Already have an account? ',
-                    style: AppTextStyles.bodyMedium,
-                  ),
+                  Text('Already have an account? ', style: AppTextStyles.bodyMedium),
                   GestureDetector(
                     onTap: () => context.go('/sign-in'),
-                    child: Text(
-                      'Sign In',
-                      style: AppTextStyles.labelLarge.copyWith(
-                        color: AppColors.primary,
-                      ),
-                    ),
+                    child: Text('Sign In', style: AppTextStyles.labelLarge.copyWith(color: AppColors.primary)),
                   ),
                 ],
               ),
@@ -156,33 +105,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget _socialButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-  }) {
+  Widget _socialButton(IconData icon, String label, VoidCallback onPressed) {
     return SizedBox(
       width: double.infinity,
       height: Dimensions.buttonMd,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: AppColors.border),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.radiusSm)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 18, color: AppColors.textSecondary),
+            Icon(icon, size: 16, color: AppColors.textSecondary),
             const SizedBox(width: Spacing.sm),
-            Text(
-              label,
-              style: AppTextStyles.button.copyWith(
-                color: AppColors.textPrimary,
-              ),
-            ),
+            Text(label, style: AppTextStyles.button.copyWith(color: AppColors.textPrimary)),
           ],
         ),
       ),

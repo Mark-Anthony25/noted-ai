@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:corvus/core/constants/colors.dart';
-
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
 import 'package:corvus/core/theme/text_styles.dart';
@@ -16,85 +15,38 @@ class MemoryTimelineScreen extends StatelessWidget {
     final memories = PlaceholderData.memories;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, Spacing.lg, Spacing.lg, Spacing.md,
-                ),
-                child: Text('Memory Timeline', style: AppTextStyles.displaySmall),
+      appBar: AppBar(title: const Text('Memory Timeline')),
+      body: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.sm, Spacing.lg, 100),
+        itemCount: memories.length + memories.length,
+        itemBuilder: (context, index) {
+          if (index.isEven) {
+            final memoryIndex = index ~/ 2;
+            if (memoryIndex >= memories.length) return const SizedBox();
+            final memory = memories[memoryIndex];
+            final showDate = memoryIndex == 0 ||
+                memories[memoryIndex].timestamp.day != memories[memoryIndex - 1].timestamp.day;
+            if (!showDate) return const SizedBox.shrink();
+            return Padding(
+              padding: const EdgeInsets.only(bottom: Spacing.sm),
+              child: Row(
+                children: [
+                  Text(DateFormat('MMMM d, yyyy').format(memory.timestamp),
+                      style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
+                  const SizedBox(width: Spacing.sm),
+                  Expanded(child: Container(height: 1, color: AppColors.divider)),
+                ],
               ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, 0, Spacing.lg, Spacing.xxl,
-                ),
-                child: Text(
-                  'Corvus remembers what matters to you',
-                  style: AppTextStyles.bodyLarge.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final memory = memories[index];
-                  final showDateHeader = index == 0 ||
-                      memories[index].timestamp.day !=
-                          memories[index - 1].timestamp.day;
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (showDateHeader)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                            Spacing.lg, Spacing.md, Spacing.lg, Spacing.sm,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                DateFormat('MMMM d, yyyy').format(memory.timestamp),
-                                style: AppTextStyles.titleMedium.copyWith(
-                                  color: AppColors.primary,
-                                ),
-                              ),
-                              const SizedBox(width: Spacing.sm),
-                              Expanded(
-                                child: Container(
-                                  height: 1,
-                                  color: AppColors.border,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: Spacing.lg,
-                          right: Spacing.lg,
-                          bottom: Spacing.sm,
-                        ),
-                        child: MemoryCard(
-                          memory: memory,
-                          onTap: () => context.push('/memory/${memory.id}'),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                childCount: memories.length,
-              ),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
-          ],
-        ),
+            );
+          }
+          final memoryIndex = index ~/ 2;
+          final memory = memories[memoryIndex];
+          if (memoryIndex >= memories.length) return const SizedBox();
+          return Padding(
+            padding: const EdgeInsets.only(bottom: Spacing.sm),
+            child: MemoryCard(memory: memory, onTap: () => context.push('/memory/${memory.id}')),
+          );
+        },
       ),
     );
   }

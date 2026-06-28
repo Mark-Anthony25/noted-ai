@@ -5,7 +5,6 @@ import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:intl/intl.dart';
 
 class NoteDetailScreen extends StatelessWidget {
   final String noteId;
@@ -20,9 +19,7 @@ class NoteDetailScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
@@ -46,35 +43,29 @@ class NoteDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              note.title,
-              style: AppTextStyles.displaySmall,
-            ),
+            Text(note.title, style: AppTextStyles.displaySmall),
             const SizedBox(height: Spacing.md),
             Row(
               children: [
+                const Icon(LucideIcons.clock, size: 12, color: AppColors.textTertiary),
+                const SizedBox(width: Spacing.xs),
                 Text(
-                  DateFormat('MMM d, yyyy - h:mm a').format(note.updatedAt),
-                  style: AppTextStyles.labelSmall,
+                  '${note.updatedAt.month}/${note.updatedAt.day}/${note.updatedAt.year}',
+                  style: AppTextStyles.caption,
                 ),
                 const Spacer(),
                 if (note.tags.isNotEmpty)
                   ...note.tags.map((tag) => Padding(
                     padding: const EdgeInsets.only(left: Spacing.xs),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Spacing.sm,
-                        vertical: Spacing.xxs,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: Spacing.sm, vertical: Spacing.xxs),
                       decoration: BoxDecoration(
                         color: AppColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(Dimensions.radiusFull),
                       ),
                       child: Text(
                         '#$tag',
-                        style: AppTextStyles.labelSmall.copyWith(
-                          color: AppColors.primary,
-                        ),
+                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary),
                       ),
                     ),
                   )),

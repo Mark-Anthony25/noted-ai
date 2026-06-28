@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 
 class CorvusFab extends StatelessWidget {
   final IconData icon;
@@ -18,8 +18,8 @@ class CorvusFab extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: onPressed,
-      backgroundColor: AppColors.primary,
-      foregroundColor: AppColors.textOnPrimary,
+      backgroundColor: context.cp.primary,
+      foregroundColor: context.cp.textOnPrimary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Dimensions.radiusLg),
       ),

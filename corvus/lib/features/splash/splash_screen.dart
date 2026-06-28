@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -56,7 +57,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: Center(
         child: AnimatedBuilder(
           animation: _controller,
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: AppColors.primary,
+                        gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primaryAlt]),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -83,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen>
                         ],
                       ),
                       child: const Icon(
-                        Icons.auto_awesome,
+                        LucideIcons.sparkles,
                         color: AppColors.textOnPrimary,
                         size: 36,
                       ),

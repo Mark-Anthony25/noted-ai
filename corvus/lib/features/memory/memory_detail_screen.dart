@@ -19,74 +19,36 @@ class MemoryDetailScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.background,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
+      appBar: AppBar(title: const Text('Memory')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(Spacing.xxl),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Spacing.md,
-                vertical: Spacing.xs,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: Spacing.md, vertical: Spacing.xs),
               decoration: BoxDecoration(
-                color: AppColors.primaryAlt.withValues(alpha: 0.15),
+                color: AppColors.primaryAlt.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(Dimensions.radiusFull),
               ),
-              child: Text(
-                memory.category,
-                style: AppTextStyles.labelMedium.copyWith(
-                  color: AppColors.primaryAlt,
-                ),
-              ),
+              child: Text(memory.category, style: AppTextStyles.caption.copyWith(color: AppColors.primaryAlt)),
             ),
             const SizedBox(height: Spacing.lg),
             Text(memory.title, style: AppTextStyles.displaySmall),
-            const SizedBox(height: Spacing.md),
-            Text(
-              DateFormat('MMMM d, yyyy').format(memory.timestamp),
-              style: AppTextStyles.labelSmall,
-            ),
-            const SizedBox(height: Spacing.xxxl),
-            Text(
-              memory.snippet,
-              style: AppTextStyles.bodyLarge.copyWith(
-                color: AppColors.textPrimary,
-                height: 1.8,
-              ),
-            ),
+            const SizedBox(height: Spacing.sm),
+            Text(DateFormat('MMMM d, yyyy').format(memory.timestamp), style: AppTextStyles.caption),
+            const SizedBox(height: Spacing.xxl),
+            Text(memory.snippet, style: AppTextStyles.bodyLarge.copyWith(height: 1.8)),
             if (memory.tags.isNotEmpty) ...[
               const SizedBox(height: Spacing.xxl),
               Wrap(
                 spacing: Spacing.sm,
                 runSpacing: Spacing.sm,
-                children: memory.tags.map((tag) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Spacing.md,
-                      vertical: Spacing.xs,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.surfaceVariant,
-                      borderRadius: BorderRadius.circular(Dimensions.radiusFull),
-                    ),
-                    child: Text(
-                      '#$tag',
-                      style: AppTextStyles.labelMedium.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                  );
-                }).toList(),
+                children: memory.tags.map((tag) => Container(
+                  padding: const EdgeInsets.symmetric(horizontal: Spacing.md, vertical: Spacing.xs),
+                  decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(Dimensions.radiusFull)),
+                  child: Text('#$tag', style: AppTextStyles.labelSmall),
+                )).toList(),
               ),
             ],
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
+import 'package:corvus/core/theme/context_colors.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class ChatHeadAvatar extends StatelessWidget {
   final double size;
@@ -25,11 +26,11 @@ class ChatHeadAvatar extends StatelessWidget {
         width: isExpanded ? 180 : size,
         height: size,
         decoration: BoxDecoration(
-          color: AppColors.primary,
+          color: context.cp.primary,
           borderRadius: BorderRadius.circular(size / 2),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withValues(alpha: 0.3),
+              color: context.cp.primary.withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -39,16 +40,16 @@ class ChatHeadAvatar extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.auto_awesome,
-                    color: AppColors.textOnPrimary,
+                  Icon(
+                    LucideIcons.sparkles,
+                    color: context.cp.textOnPrimary,
                     size: 20,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     'Corvus',
                     style: TextStyle(
-                      color: AppColors.textOnPrimary,
+                      color: context.cp.textOnPrimary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -56,10 +57,10 @@ class ChatHeadAvatar extends StatelessWidget {
               )
             : Stack(
                 children: [
-                  const Center(
+                  Center(
                     child: Icon(
-                      Icons.auto_awesome,
-                      color: AppColors.textOnPrimary,
+                      LucideIcons.sparkles,
+                      color: context.cp.textOnPrimary,
                       size: 24,
                     ),
                   ),
@@ -70,15 +71,15 @@ class ChatHeadAvatar extends StatelessWidget {
                       child: Container(
                         width: 18,
                         height: 18,
-                        decoration: const BoxDecoration(
-                          color: AppColors.error,
+                        decoration: BoxDecoration(
+                          color: context.cp.error,
                           shape: BoxShape.circle,
                         ),
                         child: Center(
                           child: Text(
                             unreadCount.toString(),
-                            style: const TextStyle(
-                              color: AppColors.textOnPrimary,
+                            style: TextStyle(
+                              color: context.cp.textOnPrimary,
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
                             ),

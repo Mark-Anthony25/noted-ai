@@ -6,10 +6,10 @@ abstract class Spacing {
   static const double sm = 8;
   static const double md = 12;
   static const double lg = 16;
-  static const double xl = 20;
-  static const double xxl = 24;
-  static const double xxxl = 32;
-  static const double xxxxl = 40;
-  static const double section = 48;
-  static const double page = 64;
+  static const double xl = 24;
+  static const double xxl = 32;
+  static const double xxxl = 40;
+  static const double xxxxl = 48;
+  static const double section = 64;
+  static const double page = 80;
 }

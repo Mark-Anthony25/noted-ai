@@ -20,50 +20,34 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: Stack(
         children: [
-          // Mock home screen content (blurred background representation)
           SafeArea(
             child: Column(
               children: [
-                // Mock header
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    Spacing.lg, Spacing.lg, Spacing.lg, 0,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.lg, Spacing.lg, 0),
                   child: Row(
                     children: [
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Home',
-                              style: AppTextStyles.displaySmall.copyWith(
-                                color: AppColors.textTertiary,
-                              ),
-                            ),
+                            Text('Home', style: AppTextStyles.displaySmall.copyWith(
+                              color: AppColors.textTertiary,
+                            )),
                             const SizedBox(height: Spacing.xxs),
-                            Text(
-                              'Saturday, June 28',
-                              style: AppTextStyles.bodyMedium.copyWith(
-                                color: AppColors.textTertiary,
-                              ),
-                            ),
+                            Text('Saturday, June 28', style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.textTertiary,
+                            )),
                           ],
                         ),
                       ),
-                      Icon(
-                        LucideIcons.bell,
-                        size: 20,
-                        color: AppColors.textTertiary,
-                      ),
+                      const Icon(LucideIcons.bell, size: 20, color: AppColors.textTertiary),
                     ],
                   ),
                 ),
                 const SizedBox(height: Spacing.xxxl),
-                // Mock quick actions
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
                   child: Row(
@@ -77,18 +61,14 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                   ),
                 ),
                 const SizedBox(height: Spacing.xxxl),
-                // Mock note cards
                 ...List.generate(3, (index) {
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      Spacing.lg, 0, Spacing.lg, Spacing.sm,
-                    ),
+                    padding: const EdgeInsets.fromLTRB(Spacing.lg, 0, Spacing.lg, Spacing.sm),
                     child: Container(
                       height: 72,
                       decoration: BoxDecoration(
                         color: AppColors.surfaceVariant,
                         borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-                        border: Border.all(color: AppColors.border),
                       ),
                     ),
                   );
@@ -96,13 +76,11 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
               ],
             ),
           ),
-          // Blur overlay to indicate chat head "minimized" state
           if (_isExpanded)
             GestureDetector(
               onTap: () => setState(() => _isExpanded = false),
               child: Container(color: Colors.black45),
             ),
-          // Chat head
           Positioned(
             right: Spacing.lg,
             bottom: Spacing.xxxxl,
@@ -114,7 +92,6 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
               ),
             ),
           ),
-          // Expanded chat preview
           if (_isExpanded)
             Positioned(
               right: Spacing.lg,
@@ -125,7 +102,6 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   borderRadius: BorderRadius.circular(Dimensions.radiusLg),
-                  border: Border.all(color: AppColors.border),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.3),
@@ -139,33 +115,22 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                     Container(
                       padding: const EdgeInsets.all(Spacing.lg),
                       decoration: const BoxDecoration(
-                        color: AppColors.primary,
+                        gradient: LinearGradient(colors: [AppColors.primary, AppColors.primaryAlt]),
                         borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(Dimensions.radiusLg - 1),
+                          top: Radius.circular(Dimensions.radiusLg),
                         ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(
-                            Icons.auto_awesome,
-                            color: AppColors.textOnPrimary,
-                            size: 18,
-                          ),
+                          const Icon(LucideIcons.sparkles, color: AppColors.textOnPrimary, size: 18),
                           const SizedBox(width: Spacing.sm),
-                          Text(
-                            'Corvus',
-                            style: AppTextStyles.titleMedium.copyWith(
-                              color: AppColors.textOnPrimary,
-                            ),
-                          ),
+                          Text('Corvus', style: AppTextStyles.titleMedium.copyWith(
+                            color: AppColors.textOnPrimary,
+                          )),
                           const Spacer(),
                           GestureDetector(
                             onTap: () => setState(() => _isExpanded = false),
-                            child: const Icon(
-                              Icons.minimize,
-                              color: AppColors.textOnPrimary,
-                              size: 20,
-                            ),
+                            child: const Icon(LucideIcons.minus, color: AppColors.textOnPrimary, size: 20),
                           ),
                         ],
                       ),
@@ -176,12 +141,9 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'How can I help you?',
-                              style: AppTextStyles.bodyMedium.copyWith(
-                                color: AppColors.textTertiary,
-                              ),
-                            ),
+                            Text('How can I help you?', style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.textTertiary,
+                            )),
                           ],
                         ),
                       ),
@@ -190,27 +152,20 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                 ),
               ),
             ),
-          // Instruction text
           Positioned(
             left: 0,
             right: 0,
             bottom: 120,
             child: Center(
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Spacing.lg,
-                  vertical: Spacing.sm,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: Spacing.lg, vertical: Spacing.sm),
                 decoration: BoxDecoration(
                   color: AppColors.surfaceElevated,
                   borderRadius: BorderRadius.circular(Dimensions.radiusFull),
                 ),
-                child: Text(
-                  'Tap the chat head to expand',
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: AppColors.textTertiary,
-                  ),
-                ),
+                child: Text('Tap the chat head to expand', style: AppTextStyles.labelMedium.copyWith(
+                  color: AppColors.textTertiary,
+                )),
               ),
             ),
           ),

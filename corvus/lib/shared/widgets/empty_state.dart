@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -32,22 +32,22 @@ class EmptyState extends StatelessWidget {
               width: 64,
               height: 64,
               decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
+                color: context.cp.surfaceVariant,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Icon(icon, size: 28, color: AppColors.textTertiary),
+              child: Icon(icon, size: 28, color: context.cp.textTertiary),
             ),
             const SizedBox(height: Spacing.xl),
             Text(
               title,
-              style: AppTextStyles.titleLarge,
+              style: AppTextStyles.titleLarge.copyWith(color: context.cp.textPrimary),
               textAlign: TextAlign.center,
             ),
             if (subtitle != null) ...[
               const SizedBox(height: Spacing.sm),
               Text(
                 subtitle!,
-                style: AppTextStyles.bodyMedium,
+                style: AppTextStyles.bodyMedium.copyWith(color: context.cp.textSecondary),
                 textAlign: TextAlign.center,
               ),
             ],

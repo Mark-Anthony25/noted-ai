@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 
 class CorvusCard extends StatelessWidget {
   final Widget child;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry? padding;
   final Color? color;
-  final double? customRadius;
 
   const CorvusCard({
     super.key,
@@ -15,7 +14,6 @@ class CorvusCard extends StatelessWidget {
     this.onTap,
     this.padding,
     this.color,
-    this.customRadius,
   });
 
   @override
@@ -23,18 +21,14 @@ class CorvusCard extends StatelessWidget {
     final card = Container(
       padding: padding ?? const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color ?? AppColors.surface,
-        borderRadius: BorderRadius.circular(customRadius ?? Dimensions.radiusMd),
-        border: Border.all(color: AppColors.border),
+        color: color ?? context.cp.surface,
+        borderRadius: BorderRadius.circular(Dimensions.radiusSm),
       ),
       child: child,
     );
 
     if (onTap != null) {
-      return GestureDetector(
-        onTap: onTap,
-        child: card,
-      );
+      return GestureDetector(onTap: onTap, child: card);
     }
 
     return card;

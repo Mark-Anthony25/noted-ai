@@ -7,7 +7,6 @@ import 'package:corvus/core/constants/placeholder_data.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -16,15 +15,12 @@ class ProfileScreen extends StatelessWidget {
     final user = PlaceholderData.user;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, Spacing.lg, Spacing.lg, Spacing.md,
-                ),
+                padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.lg, Spacing.lg, Spacing.md),
                 child: Text('Profile', style: AppTextStyles.displaySmall),
               ),
             ),
@@ -34,20 +30,16 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      width: 80,
-                      height: 80,
+                      width: 72,
+                      height: 72,
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [AppColors.primary, AppColors.primaryAlt],
-                        ),
-                        borderRadius: BorderRadius.circular(Dimensions.radiusXl),
+                        gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primaryAlt]),
+                        borderRadius: BorderRadius.circular(18),
                       ),
                       child: Center(
                         child: Text(
                           user.name.split(' ').map((n) => n[0]).join(),
-                          style: AppTextStyles.displaySmall.copyWith(
-                            color: AppColors.textOnPrimary,
-                          ),
+                          style: AppTextStyles.headlineLarge.copyWith(color: AppColors.textOnPrimary),
                         ),
                       ),
                     ),
@@ -58,9 +50,9 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: Spacing.xxl),
                     Row(
                       children: [
-                        _statCard('Notes', user.noteCount.toString(), LucideIcons.fileText),
-                        _statCard('Memories', user.memoryCount.toString(), LucideIcons.brain),
-                        _statCard('Streak', '${user.streak}d', LucideIcons.zap),
+                        _statCard(LucideIcons.fileText, user.noteCount.toString(), 'Notes'),
+                        _statCard(LucideIcons.brain, user.memoryCount.toString(), 'Memories'),
+                        _statCard(LucideIcons.zap, '${user.streak}d', 'Streak'),
                       ],
                     ),
                   ],
@@ -69,9 +61,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, Spacing.xxxl, Spacing.lg, Spacing.sm,
-                ),
+                padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.xxxl, Spacing.lg, Spacing.md),
                 child: Text('Account', style: AppTextStyles.titleLarge),
               ),
             ),
@@ -81,9 +71,7 @@ class ProfileScreen extends StatelessWidget {
             _menuItem(LucideIcons.messageCircle, 'Chat Head Preview', () => context.push('/chat-head-preview')),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, Spacing.xxl, Spacing.lg, Spacing.sm,
-                ),
+                padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.xl, Spacing.lg, Spacing.md),
                 child: Text('Settings', style: AppTextStyles.titleLarge),
               ),
             ),
@@ -98,23 +86,21 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _statCard(String label, String value, IconData icon) {
+  Widget _statCard(IconData icon, String value, String label) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: Spacing.xs),
+        margin: const EdgeInsets.symmetric(horizontal: Spacing.xxs),
         padding: const EdgeInsets.all(Spacing.lg),
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-          border: Border.all(color: AppColors.border),
+          borderRadius: BorderRadius.circular(Dimensions.radiusSm),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 20, color: AppColors.primary),
+            Icon(icon, size: 18, color: AppColors.primary),
             const SizedBox(height: Spacing.sm),
             Text(value, style: AppTextStyles.amount),
-            const SizedBox(height: Spacing.xxs),
-            Text(label, style: AppTextStyles.labelSmall),
+            Text(label, style: AppTextStyles.caption),
           ],
         ),
       ),
@@ -124,38 +110,24 @@ class ProfileScreen extends StatelessWidget {
   Widget _menuItem(IconData icon, String label, VoidCallback onTap, {bool isDestructive = false}) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          Spacing.lg, 0, Spacing.lg, Spacing.xs,
-        ),
+        padding: const EdgeInsets.fromLTRB(Spacing.lg, 0, Spacing.lg, Spacing.xs),
         child: GestureDetector(
           onTap: onTap,
           child: Container(
             padding: const EdgeInsets.all(Spacing.lg),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-              border: Border.all(color: AppColors.border),
+              borderRadius: BorderRadius.circular(Dimensions.radiusSm),
             ),
             child: Row(
               children: [
-                Icon(
-                  icon,
-                  size: 20,
-                  color: isDestructive ? AppColors.error : AppColors.textSecondary,
-                ),
+                Icon(icon, size: 18, color: isDestructive ? AppColors.error : AppColors.textSecondary),
                 const SizedBox(width: Spacing.md),
-                Text(
-                  label,
-                  style: AppTextStyles.titleMedium.copyWith(
-                    color: isDestructive ? AppColors.error : null,
-                  ),
-                ),
+                Text(label, style: AppTextStyles.titleMedium.copyWith(
+                  color: isDestructive ? AppColors.error : null,
+                )),
                 const Spacer(),
-                const Icon(
-                  LucideIcons.chevronRight,
-                  size: 16,
-                  color: AppColors.textTertiary,
-                ),
+                const Icon(LucideIcons.chevronRight, size: 14, color: AppColors.textTertiary),
               ],
             ),
           ),

@@ -5,6 +5,7 @@ import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
+import 'package:corvus/shared/widgets/corvus_button.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -29,17 +30,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final slides = PlaceholderData.onboardingSlides;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Spacing.xl,
-                Spacing.lg,
-                Spacing.xl,
-                0,
-              ),
+              padding: const EdgeInsets.fromLTRB(Spacing.xl, Spacing.lg, Spacing.xl, 0),
               child: Row(
                 children: [
                   const Spacer(),
@@ -65,9 +60,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 itemBuilder: (context, index) {
                   final slide = slides[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Spacing.xxxl,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: Spacing.xxxl),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -104,7 +97,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                   const SizedBox(height: Spacing.xxxl),
-                  ElevatedButton(
+                  CorvusButton(
+                    label: _currentPage < slides.length - 1 ? 'Continue' : 'Get Started',
                     onPressed: () {
                       if (_currentPage < slides.length - 1) {
                         _pageController.nextPage(
@@ -115,11 +109,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         context.go('/sign-in');
                       }
                     },
-                    child: Text(
-                      _currentPage < slides.length - 1
-                          ? 'Continue'
-                          : 'Get Started',
-                    ),
                   ),
                   const SizedBox(height: Spacing.lg),
                 ],

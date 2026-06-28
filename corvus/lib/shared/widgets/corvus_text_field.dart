@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
-
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 
 class CorvusTextField extends StatelessWidget {
   final String label;
@@ -72,7 +71,7 @@ class CorvusTextField extends StatelessWidget {
             child: Text(
               errorText!,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.error,
+                    color: context.cp.error,
                   ),
             ),
           ),

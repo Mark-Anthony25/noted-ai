@@ -11,119 +11,88 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.background,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text('Settings', style: AppTextStyles.headlineSmall),
-      ),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(Spacing.lg),
-          children: [
-            _sectionHeader('Appearance'),
-            const SizedBox(height: Spacing.sm),
-            _settingTile(
-              LucideIcons.moon,
-              'Dark Mode',
-              trailing: Switch(
-                value: true,
-                onChanged: (_) {},
-                activeTrackColor: AppColors.primary,
-                activeThumbColor: AppColors.textOnPrimary,
-              ),
-            ),
-            _settingTile(
-              LucideIcons.type,
-              'Font Size',
-              subtitle: 'System default',
-              trailing: const Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textTertiary),
-            ),
-            _sectionHeader('Notifications'),
-            const SizedBox(height: Spacing.sm),
-            _settingTile(
-              LucideIcons.bell,
-              'Push Notifications',
-              trailing: Switch(
-                value: true,
-                onChanged: (_) {},
-                activeTrackColor: AppColors.primary,
-                activeThumbColor: AppColors.textOnPrimary,
-              ),
-            ),
-            _settingTile(
-              LucideIcons.volume2,
-              'Sound',
-              trailing: Switch(
-                value: false,
-                onChanged: (_) {},
-                activeTrackColor: AppColors.primary,
-                activeThumbColor: AppColors.textOnPrimary,
-              ),
-            ),
-            _settingTile(
-              LucideIcons.vibrate,
-              'Haptic Feedback',
-              trailing: Switch(
-                value: true,
-                onChanged: (_) {},
-                activeTrackColor: AppColors.primary,
-                activeThumbColor: AppColors.textOnPrimary,
-              ),
-            ),
-            _sectionHeader('Data & Privacy'),
-            const SizedBox(height: Spacing.sm),
-            _settingTile(LucideIcons.database, 'Manage Storage', trailing: const Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textTertiary)),
-            _settingTile(LucideIcons.download, 'Export Data', trailing: const Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textTertiary)),
-            _settingTile(LucideIcons.trash2, 'Clear All Data', trailing: const Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textTertiary)),
-            _sectionHeader('About'),
-            const SizedBox(height: Spacing.sm),
-            _settingTile(LucideIcons.info, 'Version', subtitle: '1.0.0'),
-            _settingTile(LucideIcons.fileText, 'Terms of Service', trailing: const Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textTertiary)),
-            _settingTile(LucideIcons.shield, 'Privacy Policy', trailing: const Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textTertiary)),
-          ],
-        ),
+      appBar: AppBar(title: const Text('Settings')),
+      body: ListView(
+        padding: const EdgeInsets.all(Spacing.lg),
+        children: [
+          _section('Appearance'),
+          _toggle(LucideIcons.moon, 'Dark Mode', true),
+          _row(LucideIcons.type, 'Font Size', subtitle: 'System default'),
+          _section('Notifications'),
+          _toggle(LucideIcons.bell, 'Push Notifications', true),
+          _toggle(LucideIcons.volume2, 'Sound', false),
+          _toggle(LucideIcons.vibrate, 'Haptic Feedback', true),
+          _section('Data & Privacy'),
+          _row(LucideIcons.database, 'Manage Storage'),
+          _row(LucideIcons.download, 'Export Data'),
+          _row(LucideIcons.trash2, 'Clear All Data'),
+          _section('About'),
+          _row(LucideIcons.info, 'Version', subtitle: '1.0.0'),
+          _row(LucideIcons.fileText, 'Terms of Service'),
+          _row(LucideIcons.shield, 'Privacy Policy'),
+        ],
       ),
     );
   }
 
-  Widget _sectionHeader(String title) {
+  Widget _section(String title) {
     return Padding(
       padding: const EdgeInsets.only(top: Spacing.xxl, bottom: Spacing.sm),
-      child: Text(title, style: AppTextStyles.titleLarge.copyWith(color: AppColors.primary)),
+      child: Text(title, style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
     );
   }
 
-    Widget _settingTile(IconData icon, String title, {String? subtitle, Widget? trailing}) {
+  Widget _row(IconData icon, String title, {String? subtitle}) {
     return Container(
       margin: const EdgeInsets.only(bottom: Spacing.xs),
       padding: const EdgeInsets.all(Spacing.lg),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-        border: Border.all(color: AppColors.border),
+        borderRadius: BorderRadius.circular(Dimensions.radiusSm),
       ),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: AppColors.textSecondary),
+          Icon(icon, size: 18, color: AppColors.textSecondary),
           const SizedBox(width: Spacing.md),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppTextStyles.titleMedium),
-                if (subtitle != null) ...[
-                  const SizedBox(height: Spacing.xxs),
-                  Text(subtitle, style: AppTextStyles.bodySmall),
-                ],
+                if (subtitle != null) Text(subtitle, style: AppTextStyles.bodySmall),
               ],
             ),
           ),
-              ?trailing,
+          const Icon(LucideIcons.chevronRight, size: 14, color: AppColors.textTertiary),
+        ],
+      ),
+    );
+  }
+
+  Widget _toggle(IconData icon, String title, bool value) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: Spacing.xs),
+      padding: const EdgeInsets.all(Spacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(Dimensions.radiusSm),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 18, color: AppColors.textSecondary),
+          const SizedBox(width: Spacing.md),
+          Expanded(child: Text(title, style: AppTextStyles.titleMedium)),
+          SizedBox(
+            height: 28,
+            child: Switch(
+              value: value,
+              onChanged: (_) {},
+              activeTrackColor: AppColors.primary.withValues(alpha: 0.3),
+              activeThumbColor: AppColors.primary,
+              inactiveTrackColor: AppColors.disabled,
+              inactiveThumbColor: AppColors.textTertiary,
+            ),
+          ),
         ],
       ),
     );

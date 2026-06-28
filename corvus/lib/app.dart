@@ -10,7 +10,9 @@ class CorvusApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Corvus',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
       routerConfig: appRouter,
     );
   }

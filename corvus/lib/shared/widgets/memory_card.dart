@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/core/models/memory.dart';
 import 'package:intl/intl.dart';
@@ -23,9 +23,8 @@ class MemoryCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(Spacing.lg),
         decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-          border: Border.all(color: AppColors.border),
+          color: context.cp.surface,
+          borderRadius: BorderRadius.circular(Dimensions.radiusSm),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,40 +32,23 @@ class MemoryCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Spacing.sm,
-                    vertical: Spacing.xxs,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: Spacing.sm, vertical: Spacing.xxs),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryAlt.withValues(alpha: 0.15),
+                    color: context.cp.primaryAlt.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(Dimensions.radiusFull),
                   ),
-                  child: Text(
-                    memory.category,
-                    style: AppTextStyles.labelSmall.copyWith(
-                      color: AppColors.primaryAlt,
-                    ),
-                  ),
+                  child: Text(memory.category, style: AppTextStyles.caption.copyWith(color: context.cp.primaryAlt)),
                 ),
                 const Spacer(),
-                Text(
-                  DateFormat('MMM d').format(memory.timestamp),
-                  style: AppTextStyles.labelSmall,
-                ),
+                Text(DateFormat('MMM d').format(memory.timestamp),
+                    style: AppTextStyles.caption.copyWith(color: context.cp.textTertiary)),
               ],
             ),
             const SizedBox(height: Spacing.sm),
-            Text(
-              memory.title,
-              style: AppTextStyles.titleMedium,
-            ),
-            const SizedBox(height: Spacing.xs),
-            Text(
-              memory.snippet,
-              style: AppTextStyles.bodyMedium,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+            Text(memory.title, style: AppTextStyles.titleMedium.copyWith(color: context.cp.textPrimary)),
+            const SizedBox(height: Spacing.xxs),
+            Text(memory.snippet, style: AppTextStyles.bodyMedium.copyWith(color: context.cp.textSecondary),
+                maxLines: 2, overflow: TextOverflow.ellipsis),
             if (memory.tags.isNotEmpty) ...[
               const SizedBox(height: Spacing.sm),
               Wrap(
@@ -74,20 +56,12 @@ class MemoryCard extends StatelessWidget {
                 runSpacing: Spacing.xs,
                 children: memory.tags.map((tag) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Spacing.sm,
-                      vertical: 2,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: Spacing.sm, vertical: 2),
                     decoration: BoxDecoration(
-                      color: AppColors.surfaceVariant,
+                      color: context.cp.background,
                       borderRadius: BorderRadius.circular(Dimensions.radiusFull),
                     ),
-                    child: Text(
-                      '#$tag',
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.textTertiary,
-                      ),
-                    ),
+                    child: Text('#$tag', style: AppTextStyles.caption.copyWith(color: context.cp.textTertiary)),
                   );
                 }).toList(),
               ),

@@ -24,7 +24,6 @@ import 'package:corvus/features/settings/settings_screen.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
-
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 
 final GoRouter appRouter = GoRouter(
@@ -135,23 +134,17 @@ class _ShellWithBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
     final currentIndex = _currentIndex(location);
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
-      extendBody: true,
-      body: child,
+      body: Padding(
+        padding: EdgeInsets.only(bottom: Dimensions.bottomNavHeight + bottomPadding),
+        child: child,
+      ),
       bottomNavigationBar: Container(
-        height: Dimensions.bottomNavHeight,
-        margin: EdgeInsets.only(
-          left: Spacing.lg,
-          right: Spacing.lg,
-          bottom: MediaQuery.of(context).padding.bottom + Spacing.sm,
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(Dimensions.radiusXxl),
-          border: Border.all(color: AppColors.border),
-        ),
+        height: Dimensions.bottomNavHeight + bottomPadding,
+        padding: EdgeInsets.only(bottom: bottomPadding),
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Row(
           children: [
             _NavItem(
@@ -203,12 +196,13 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    final unselected = Theme.of(context).textTheme.bodySmall?.color ?? AppColors.textTertiary;
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
         behavior: HitTestBehavior.opaque,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+        child: Container(
           padding: const EdgeInsets.symmetric(vertical: Spacing.sm),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -216,13 +210,13 @@ class _NavItem extends StatelessWidget {
               Icon(
                 icon,
                 size: Dimensions.iconMd,
-                color: isSelected ? AppColors.primary : AppColors.textTertiary,
+                color: isSelected ? primary : unselected,
               ),
               const SizedBox(height: Spacing.xxs),
               Text(
                 label,
-                style: AppTextStyles.labelSmall.copyWith(
-                  color: isSelected ? AppColors.primary : AppColors.textTertiary,
+                style: (isSelected ? AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w500) : AppTextStyles.labelSmall).copyWith(
+                  color: isSelected ? primary : unselected,
                 ),
               ),
             ],
@@ -240,20 +234,21 @@ class _CenterChatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 56,
-        height: 56,
+        width: 44,
+        height: 44,
         margin: const EdgeInsets.symmetric(horizontal: Spacing.xs),
-        decoration: const BoxDecoration(
-          color: AppColors.primary,
-          shape: BoxShape.circle,
+        decoration: BoxDecoration(
+          color: primary.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(12),
         ),
-        child: const Icon(
+        child: Icon(
           LucideIcons.messageCircle,
-          color: AppColors.textOnPrimary,
-          size: 28,
+          color: primary,
+          size: 22,
         ),
       ),
     );

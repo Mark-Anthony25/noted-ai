@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
-
+import 'package:corvus/core/theme/context_colors.dart';
 
 enum ButtonVariant { primary, secondary, ghost, outline, danger }
 
@@ -35,40 +34,37 @@ class CorvusButton extends StatelessWidget {
     return SizedBox(
       width: isFullWidth ? double.infinity : null,
       height: height ?? Dimensions.buttonMd,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        child: _buildButton(isDisabled),
-      ),
+      child: _buildButton(context, isDisabled),
     );
   }
 
-  Widget _buildButton(bool isDisabled) {
+  Widget _buildButton(BuildContext context, bool isDisabled) {
     switch (variant) {
       case ButtonVariant.primary:
-        return _buildPrimaryButton(isDisabled);
+        return _buildPrimaryButton(context, isDisabled);
       case ButtonVariant.secondary:
-        return _buildSecondaryButton(isDisabled);
+        return _buildSecondaryButton(context, isDisabled);
       case ButtonVariant.ghost:
-        return _buildGhostButton(isDisabled);
+        return _buildGhostButton(context, isDisabled);
       case ButtonVariant.outline:
-        return _buildOutlineButton(isDisabled);
+        return _buildOutlineButton(context, isDisabled);
       case ButtonVariant.danger:
-        return _buildDangerButton(isDisabled);
+        return _buildDangerButton(context, isDisabled);
     }
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (isLoading)
-          const SizedBox(
+          SizedBox(
             width: 18,
             height: 18,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              color: AppColors.textOnPrimary,
+              color: context.cp.textOnPrimary,
             ),
           )
         else ...[
@@ -86,84 +82,84 @@ class CorvusButton extends StatelessWidget {
     );
   }
 
-  Widget _buildPrimaryButton(bool isDisabled) {
+  Widget _buildPrimaryButton(BuildContext context, bool isDisabled) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isDisabled ? AppColors.disabled : AppColors.primary,
-        foregroundColor: AppColors.textOnPrimary,
-        disabledBackgroundColor: AppColors.disabled,
-        disabledForegroundColor: AppColors.disabledText,
+        backgroundColor: isDisabled ? context.cp.disabled : context.cp.primary,
+        foregroundColor: context.cp.textOnPrimary,
+        disabledBackgroundColor: context.cp.disabled,
+        disabledForegroundColor: context.cp.disabledText,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Dimensions.radiusMd),
         ),
       ),
-      child: _buildContent(),
+      child: _buildContent(context),
     );
   }
 
-  Widget _buildSecondaryButton(bool isDisabled) {
+  Widget _buildSecondaryButton(BuildContext context, bool isDisabled) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.surfaceVariant,
-        foregroundColor: AppColors.textPrimary,
-        disabledBackgroundColor: AppColors.disabled,
-        disabledForegroundColor: AppColors.disabledText,
+        backgroundColor: context.cp.surfaceVariant,
+        foregroundColor: context.cp.textPrimary,
+        disabledBackgroundColor: context.cp.disabled,
+        disabledForegroundColor: context.cp.disabledText,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Dimensions.radiusMd),
         ),
       ),
-      child: _buildContent(),
+      child: _buildContent(context),
     );
   }
 
-  Widget _buildGhostButton(bool isDisabled) {
+  Widget _buildGhostButton(BuildContext context, bool isDisabled) {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        foregroundColor: isDisabled ? AppColors.disabledText : AppColors.textSecondary,
+        foregroundColor: isDisabled ? context.cp.disabledText : context.cp.textSecondary,
         padding: const EdgeInsets.symmetric(
           horizontal: Spacing.lg,
           vertical: Spacing.sm,
         ),
       ),
-      child: _buildContent(),
+      child: _buildContent(context),
     );
   }
 
-  Widget _buildOutlineButton(bool isDisabled) {
+  Widget _buildOutlineButton(BuildContext context, bool isDisabled) {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        foregroundColor: isDisabled ? AppColors.disabledText : AppColors.textPrimary,
+        foregroundColor: isDisabled ? context.cp.disabledText : context.cp.textPrimary,
         side: BorderSide(
-          color: isDisabled ? AppColors.disabled : AppColors.borderLight,
+          color: isDisabled ? context.cp.disabled : context.cp.borderLight,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Dimensions.radiusMd),
         ),
       ),
-      child: _buildContent(),
+      child: _buildContent(context),
     );
   }
 
-  Widget _buildDangerButton(bool isDisabled) {
+  Widget _buildDangerButton(BuildContext context, bool isDisabled) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isDisabled ? AppColors.disabled : AppColors.error,
-        foregroundColor: AppColors.textOnPrimary,
-        disabledBackgroundColor: AppColors.disabled,
-        disabledForegroundColor: AppColors.disabledText,
+        backgroundColor: isDisabled ? context.cp.disabled : context.cp.error,
+        foregroundColor: context.cp.textOnPrimary,
+        disabledBackgroundColor: context.cp.disabled,
+        disabledForegroundColor: context.cp.disabledText,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Dimensions.radiusMd),
         ),
       ),
-      child: _buildContent(),
+      child: _buildContent(context),
     );
   }
 }

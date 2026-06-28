@@ -30,36 +30,23 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(Spacing.xxl),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: Spacing.page),
-              Text(
-                'Welcome back',
-                style: AppTextStyles.displayMedium,
-              ),
+              const SizedBox(height: Spacing.section),
+              Text('Welcome back', style: AppTextStyles.displayMedium),
               const SizedBox(height: Spacing.sm),
-              Text(
-                'Sign in to continue with Corvus',
-                style: AppTextStyles.bodyLarge.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
+              Text('Sign in to continue with Corvus', style: AppTextStyles.bodyMedium),
               const SizedBox(height: Spacing.xxxxl),
               CorvusTextField(
                 label: 'Email',
                 hintText: 'alex@corvus.app',
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(
-                  LucideIcons.mail,
-                  size: 18,
-                  color: AppColors.textTertiary,
-                ),
+                prefixIcon: const Icon(LucideIcons.mail, size: 16, color: AppColors.textTertiary),
               ),
               const SizedBox(height: Spacing.xl),
               CorvusTextField(
@@ -67,84 +54,44 @@ class _SignInScreenState extends State<SignInScreen> {
                 hintText: 'Enter your password',
                 controller: _passwordController,
                 isPassword: _obscurePassword,
-                prefixIcon: const Icon(
-                  LucideIcons.lock,
-                  size: 18,
-                  color: AppColors.textTertiary,
-                ),
+                prefixIcon: const Icon(LucideIcons.lock, size: 16, color: AppColors.textTertiary),
                 suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscurePassword ? LucideIcons.eyeOff : LucideIcons.eye,
-                    size: 18,
-                    color: AppColors.textTertiary,
-                  ),
-                  onPressed: () {
-                    setState(() => _obscurePassword = !_obscurePassword);
-                  },
+                  icon: Icon(_obscurePassword ? LucideIcons.eyeOff : LucideIcons.eye, size: 16, color: AppColors.textTertiary),
+                  onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                 ),
               ),
-              const SizedBox(height: Spacing.sm),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {},
-                  child: Text(
-                    'Forgot password?',
-                    style: AppTextStyles.labelMedium.copyWith(
-                      color: AppColors.primary,
-                    ),
-                  ),
+                  child: Text('Forgot password?', style: AppTextStyles.labelMedium.copyWith(color: AppColors.primary)),
                 ),
               ),
-              const SizedBox(height: Spacing.xl),
-              CorvusButton(
-                label: 'Sign In',
-                onPressed: () => context.go('/home'),
-              ),
+              const SizedBox(height: Spacing.lg),
+              CorvusButton(label: 'Sign In', onPressed: () => context.go('/home')),
               const SizedBox(height: Spacing.xl),
               Row(
                 children: [
                   const Expanded(child: Divider()),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Spacing.lg,
-                    ),
-                    child: Text(
-                      'or continue with',
-                      style: AppTextStyles.labelSmall,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
+                    child: Text('or continue with', style: AppTextStyles.caption),
                   ),
                   const Expanded(child: Divider()),
                 ],
               ),
               const SizedBox(height: Spacing.xl),
-              _socialButton(
-                icon: LucideIcons.monitor,
-                label: 'Google',
-                onPressed: () => context.go('/home'),
-              ),
+              _socialButton(LucideIcons.monitor, 'Google', () => context.go('/home')),
               const SizedBox(height: Spacing.sm),
-              _socialButton(
-                icon: LucideIcons.apple,
-                label: 'Apple',
-                onPressed: () => context.go('/home'),
-              ),
+              _socialButton(LucideIcons.apple, 'Apple', () => context.go('/home')),
               const SizedBox(height: Spacing.xxxxl),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Don't have an account? ",
-                    style: AppTextStyles.bodyMedium,
-                  ),
+                  Text("Don't have an account? ", style: AppTextStyles.bodyMedium),
                   GestureDetector(
                     onTap: () => context.go('/sign-up'),
-                    child: Text(
-                      'Sign Up',
-                      style: AppTextStyles.labelLarge.copyWith(
-                        color: AppColors.primary,
-                      ),
-                    ),
+                    child: Text('Sign Up', style: AppTextStyles.labelLarge.copyWith(color: AppColors.primary)),
                   ),
                 ],
               ),
@@ -155,33 +102,21 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _socialButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-  }) {
+  Widget _socialButton(IconData icon, String label, VoidCallback onPressed) {
     return SizedBox(
       width: double.infinity,
       height: Dimensions.buttonMd,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: AppColors.border),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimensions.radiusMd),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.radiusSm)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 18, color: AppColors.textSecondary),
+            Icon(icon, size: 16, color: AppColors.textSecondary),
             const SizedBox(width: Spacing.sm),
-            Text(
-              label,
-              style: AppTextStyles.button.copyWith(
-                color: AppColors.textPrimary,
-              ),
-            ),
+            Text(label, style: AppTextStyles.button.copyWith(color: AppColors.textPrimary)),
           ],
         ),
       ),

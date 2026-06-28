@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:corvus/core/constants/colors.dart';
-
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/shared/widgets/schedule_card.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:intl/intl.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -31,15 +29,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
         r.dueDate.day == _selectedDate.day).toList();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, Spacing.lg, Spacing.lg, Spacing.md,
-                ),
+                padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.lg, Spacing.lg, Spacing.md),
                 child: Text('Calendar', style: AppTextStyles.displaySmall),
               ),
             ),
@@ -54,7 +49,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       onPressed: () {},
                     ),
                     Text(
-                      DateFormat('MMMM yyyy').format(now),
+                      '${_getMonthName(now.month)} ${now.year}',
                       style: AppTextStyles.titleLarge,
                     ),
                     IconButton(
@@ -67,9 +62,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, Spacing.md, Spacing.lg, 0,
-                ),
+                padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.md, Spacing.lg, 0),
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -84,10 +77,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     }
                     final day = index - firstWeekday + 1;
                     final date = DateTime(now.year, now.month, day);
-                    final isToday = date.day == now.day &&
-                        date.month == now.month;
-                    final isSelected = date.day == _selectedDate.day &&
-                        date.month == _selectedDate.month;
+                    final isToday = date.day == now.day && date.month == now.month;
+                    final isSelected = date.day == _selectedDate.day && date.month == _selectedDate.month;
 
                     return GestureDetector(
                       onTap: () => setState(() => _selectedDate = date),
@@ -122,11 +113,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  Spacing.lg, Spacing.xxl, Spacing.lg, Spacing.md,
-                ),
+                padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.xxl, Spacing.lg, Spacing.md),
                 child: Text(
-                  DateFormat('EEEE, MMMM d').format(_selectedDate),
+                  '${_getDayName(_selectedDate.weekday)}, ${_getMonthName(_selectedDate.month)} ${_selectedDate.day}',
                   style: AppTextStyles.titleLarge,
                 ),
               ),
@@ -135,11 +124,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(Spacing.xxxl),
-                  child: Center(
-                    child: Text(
-                      'No events for this day',
-                      style: AppTextStyles.bodyMedium,
-                    ),
+                  child: const Center(
+                    child: Text('No events for this day'),
                   ),
                 ),
               )
@@ -149,9 +135,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   (context, index) {
                     final reminder = dayEvents[index];
                     return Padding(
-                      padding: const EdgeInsets.only(
-                        left: Spacing.lg, right: Spacing.lg, bottom: Spacing.sm,
-                      ),
+                      padding: const EdgeInsets.only(left: Spacing.lg, right: Spacing.lg, bottom: Spacing.sm),
                       child: ScheduleCard(
                         title: reminder.title,
                         description: reminder.description,
@@ -168,5 +152,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ),
       ),
     );
+  }
+
+  String _getMonthName(int month) {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months[month - 1];
+  }
+
+  String _getDayName(int weekday) {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    return days[weekday - 1];
   }
 }

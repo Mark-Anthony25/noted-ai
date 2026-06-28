@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 
 class CorvusDialog extends StatelessWidget {
@@ -27,7 +27,7 @@ class CorvusDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.surface,
+      backgroundColor: context.cp.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Dimensions.radiusLg),
       ),
@@ -37,9 +37,9 @@ class CorvusDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppTextStyles.headlineSmall),
+            Text(title, style: AppTextStyles.headlineSmall.copyWith(color: context.cp.textPrimary)),
             const SizedBox(height: Spacing.md),
-            Text(message, style: AppTextStyles.bodyMedium),
+            Text(message, style: AppTextStyles.bodyMedium.copyWith(color: context.cp.textSecondary)),
             const SizedBox(height: Spacing.xxl),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -55,9 +55,9 @@ class CorvusDialog extends StatelessWidget {
                       () => Navigator.of(context).pop(),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isDestructive
-                        ? AppColors.error
-                        : AppColors.primary,
-                    foregroundColor: AppColors.textOnPrimary,
+                        ? context.cp.error
+                        : context.cp.primary,
+                    foregroundColor: context.cp.textOnPrimary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(Dimensions.radiusMd),
                     ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:corvus/core/constants/colors.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
@@ -39,10 +39,10 @@ class NotesListScreen extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          _chip('All', true),
-                          _chip('Work', false),
-                          _chip('Personal', false),
-                          _chip('Reading', false),
+                          _chip(context, 'All', true),
+                          _chip(context, 'Work', false),
+                          _chip(context, 'Personal', false),
+                          _chip(context, 'Reading', false),
                         ],
                       ),
                     ),
@@ -59,24 +59,24 @@ class NotesListScreen extends StatelessWidget {
                 childCount: notes.length,
               ),
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            SliverToBoxAdapter(child: SizedBox(height: Spacing.lg)),
           ],
         ),
       ),
     );
   }
 
-  Widget _chip(String label, bool selected) {
+  Widget _chip(BuildContext context, String label, bool selected) {
     return Padding(
       padding: const EdgeInsets.only(right: Spacing.sm),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: Spacing.md, vertical: Spacing.xxs + 1),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary.withValues(alpha: 0.12) : AppColors.surface,
+          color: selected ? context.cp.primary.withValues(alpha: 0.12) : context.cp.surface,
           borderRadius: BorderRadius.circular(Dimensions.radiusFull),
         ),
         child: Text(label, style: AppTextStyles.labelSmall.copyWith(
-          color: selected ? AppColors.primary : AppColors.textTertiary,
+          color: selected ? context.cp.primary : context.cp.textTertiary,
         )),
       ),
     );

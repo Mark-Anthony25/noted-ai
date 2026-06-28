@@ -184,7 +184,7 @@ class AppTheme {
     );
   }
 
-  // ── Perplexity-inspired dark theme ──────────────────────────────────────
+  // ── Claude-inspired dark theme ─────────────────────────────────────────────
 
   static ThemeData get dark {
     return ThemeData(

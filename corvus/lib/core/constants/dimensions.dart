@@ -36,7 +36,7 @@ abstract class Dimensions {
   static const double chatHeadExpandedWidth = 180;
 
   // Bottom Nav
-  static const double bottomNavHeight = 60;
+  static const double bottomNavHeight = 48;
 
   // App Bar
   static const double appBarHeight = 52;

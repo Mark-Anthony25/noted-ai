@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:corvus/core/constants/colors.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
@@ -33,13 +33,13 @@ class ProfileScreen extends StatelessWidget {
                       width: 72,
                       height: 72,
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primaryAlt]),
+                        gradient: LinearGradient(colors: [context.cp.primary, context.cp.primaryAlt]),
                         borderRadius: BorderRadius.circular(18),
                       ),
                       child: Center(
                         child: Text(
                           user.name.split(' ').map((n) => n[0]).join(),
-                          style: AppTextStyles.headlineLarge.copyWith(color: AppColors.textOnPrimary),
+                          style: AppTextStyles.headlineLarge.copyWith(color: context.cp.textOnPrimary),
                         ),
                       ),
                     ),
@@ -50,9 +50,9 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: Spacing.xxl),
                     Row(
                       children: [
-                        _statCard(LucideIcons.fileText, user.noteCount.toString(), 'Notes'),
-                        _statCard(LucideIcons.brain, user.memoryCount.toString(), 'Memories'),
-                        _statCard(LucideIcons.zap, '${user.streak}d', 'Streak'),
+                        _statCard(context, LucideIcons.fileText, user.noteCount.toString(), 'Notes'),
+                        _statCard(context, LucideIcons.brain, user.memoryCount.toString(), 'Memories'),
+                        _statCard(context, LucideIcons.zap, '${user.streak}d', 'Streak'),
                       ],
                     ),
                   ],
@@ -65,20 +65,20 @@ class ProfileScreen extends StatelessWidget {
                 child: Text('Account', style: AppTextStyles.titleLarge),
               ),
             ),
-            _menuItem(LucideIcons.user, 'Edit Profile', () {}),
-            _menuItem(LucideIcons.bell, 'Notifications', () => context.push('/notifications')),
-            _menuItem(LucideIcons.calendar, 'Calendar', () => context.push('/calendar')),
-            _menuItem(LucideIcons.messageCircle, 'Chat Head Preview', () => context.push('/chat-head-preview')),
+            _menuItem(context, LucideIcons.user, 'Edit Profile', () {}),
+            _menuItem(context, LucideIcons.bell, 'Notifications', () => context.push('/notifications')),
+            _menuItem(context, LucideIcons.calendar, 'Calendar', () => context.push('/calendar')),
+            _menuItem(context, LucideIcons.messageCircle, 'Chat Head Preview', () => context.push('/chat-head-preview')),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(Spacing.lg, Spacing.xl, Spacing.lg, Spacing.md),
                 child: Text('Settings', style: AppTextStyles.titleLarge),
               ),
             ),
-            _menuItem(LucideIcons.settings, 'Preferences', () => context.push('/settings')),
-            _menuItem(LucideIcons.shield, 'Privacy', () {}),
-            _menuItem(LucideIcons.helpCircle, 'Help & Support', () {}),
-            _menuItem(LucideIcons.logOut, 'Sign Out', () => context.go('/sign-in'), isDestructive: true),
+            _menuItem(context, LucideIcons.settings, 'Preferences', () => context.push('/settings')),
+            _menuItem(context, LucideIcons.shield, 'Privacy', () {}),
+            _menuItem(context, LucideIcons.helpCircle, 'Help & Support', () {}),
+            _menuItem(context, LucideIcons.logOut, 'Sign Out', () => context.go('/sign-in'), isDestructive: true),
             const SliverToBoxAdapter(child: SizedBox(height: 100)),
           ],
         ),
@@ -86,18 +86,18 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _statCard(IconData icon, String value, String label) {
+  Widget _statCard(BuildContext context, IconData icon, String value, String label) {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: Spacing.xxs),
         padding: const EdgeInsets.all(Spacing.lg),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: context.cp.surface,
           borderRadius: BorderRadius.circular(Dimensions.radiusSm),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 18, color: AppColors.primary),
+            Icon(icon, size: 18, color: context.cp.primary),
             const SizedBox(height: Spacing.sm),
             Text(value, style: AppTextStyles.amount),
             Text(label, style: AppTextStyles.caption),
@@ -107,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _menuItem(IconData icon, String label, VoidCallback onTap, {bool isDestructive = false}) {
+  Widget _menuItem(BuildContext context, IconData icon, String label, VoidCallback onTap, {bool isDestructive = false}) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(Spacing.lg, 0, Spacing.lg, Spacing.xs),
@@ -116,18 +116,18 @@ class ProfileScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(Spacing.lg),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: context.cp.surface,
               borderRadius: BorderRadius.circular(Dimensions.radiusSm),
             ),
             child: Row(
               children: [
-                Icon(icon, size: 18, color: isDestructive ? AppColors.error : AppColors.textSecondary),
+                Icon(icon, size: 18, color: isDestructive ? context.cp.error : context.cp.textSecondary),
                 const SizedBox(width: Spacing.md),
                 Text(label, style: AppTextStyles.titleMedium.copyWith(
-                  color: isDestructive ? AppColors.error : null,
+                  color: isDestructive ? context.cp.error : null,
                 )),
                 const Spacer(),
-                const Icon(LucideIcons.chevronRight, size: 14, color: AppColors.textTertiary),
+                Icon(LucideIcons.chevronRight, size: 14, color: context.cp.textTertiary),
               ],
             ),
           ),

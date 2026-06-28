@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/features/splash/splash_screen.dart';
 import 'package:corvus/features/onboarding/onboarding_screen.dart';
@@ -137,15 +137,13 @@ class _ShellWithBottomNav extends StatelessWidget {
     final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(bottom: Dimensions.bottomNavHeight + bottomPadding),
-        child: child,
-      ),
+      body: child,
       bottomNavigationBar: Container(
         height: Dimensions.bottomNavHeight + bottomPadding,
         padding: EdgeInsets.only(bottom: bottomPadding),
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _NavItem(
               icon: LucideIcons.home,
@@ -197,13 +195,13 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
-    final unselected = Theme.of(context).textTheme.bodySmall?.color ?? AppColors.textTertiary;
+    final unselected = Theme.of(context).textTheme.bodySmall?.color ?? context.cp.textTertiary;
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
         behavior: HitTestBehavior.opaque,
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: Spacing.sm),
+          alignment: Alignment.center,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

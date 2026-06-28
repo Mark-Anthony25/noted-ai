@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/shared/widgets/chat_head_avatar.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -34,16 +34,16 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Home', style: AppTextStyles.displaySmall.copyWith(
-                              color: AppColors.textTertiary,
+                              color: context.cp.textTertiary,
                             )),
                             const SizedBox(height: Spacing.xxs),
                             Text('Saturday, June 28', style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.textTertiary,
+                              color: context.cp.textTertiary,
                             )),
                           ],
                         ),
                       ),
-                      const Icon(LucideIcons.bell, size: 20, color: AppColors.textTertiary),
+                      Icon(LucideIcons.bell, size: 20, color: context.cp.textTertiary),
                     ],
                   ),
                 ),
@@ -53,10 +53,10 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _mockQuickAction(LucideIcons.filePlus, AppColors.textTertiary),
-                      _mockQuickAction(LucideIcons.bellPlus, AppColors.textTertiary),
-                      _mockQuickAction(LucideIcons.search, AppColors.textTertiary),
-                      _mockQuickAction(LucideIcons.messageCircle, AppColors.textTertiary),
+                      _mockQuickAction(LucideIcons.filePlus, context.cp.textTertiary),
+                      _mockQuickAction(LucideIcons.bellPlus, context.cp.textTertiary),
+                      _mockQuickAction(LucideIcons.search, context.cp.textTertiary),
+                      _mockQuickAction(LucideIcons.messageCircle, context.cp.textTertiary),
                     ],
                   ),
                 ),
@@ -67,7 +67,7 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                     child: Container(
                       height: 72,
                       decoration: BoxDecoration(
-                        color: AppColors.surfaceVariant,
+                        color: context.cp.surfaceVariant,
                         borderRadius: BorderRadius.circular(Dimensions.radiusMd),
                       ),
                     ),
@@ -100,7 +100,7 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                 width: 300,
                 height: 400,
                 decoration: BoxDecoration(
-                  color: AppColors.surface,
+                  color: context.cp.surface,
                   borderRadius: BorderRadius.circular(Dimensions.radiusLg),
                   boxShadow: [
                     BoxShadow(
@@ -114,23 +114,23 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                   children: [
                     Container(
                       padding: const EdgeInsets.all(Spacing.lg),
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(colors: [AppColors.primary, AppColors.primaryAlt]),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [context.cp.primary, context.cp.primaryAlt]),
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(Dimensions.radiusLg),
                         ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(LucideIcons.sparkles, color: AppColors.textOnPrimary, size: 18),
+                          Icon(LucideIcons.sparkles, color: context.cp.textOnPrimary, size: 18),
                           const SizedBox(width: Spacing.sm),
                           Text('Corvus', style: AppTextStyles.titleMedium.copyWith(
-                            color: AppColors.textOnPrimary,
+                            color: context.cp.textOnPrimary,
                           )),
                           const Spacer(),
                           GestureDetector(
                             onTap: () => setState(() => _isExpanded = false),
-                            child: const Icon(LucideIcons.minus, color: AppColors.textOnPrimary, size: 20),
+                            child: Icon(LucideIcons.minus, color: context.cp.textOnPrimary, size: 20),
                           ),
                         ],
                       ),
@@ -142,7 +142,7 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('How can I help you?', style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.textTertiary,
+                              color: context.cp.textTertiary,
                             )),
                           ],
                         ),
@@ -160,11 +160,11 @@ class _ChatHeadPreviewScreenState extends State<ChatHeadPreviewScreen>
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: Spacing.lg, vertical: Spacing.sm),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceElevated,
+                  color: context.cp.surfaceElevated,
                   borderRadius: BorderRadius.circular(Dimensions.radiusFull),
                 ),
                 child: Text('Tap the chat head to expand', style: AppTextStyles.labelMedium.copyWith(
-                  color: AppColors.textTertiary,
+                  color: context.cp.textTertiary,
                 )),
               ),
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
 import 'package:corvus/core/theme/text_styles.dart';
@@ -28,10 +28,10 @@ class MemoryDetailScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: Spacing.md, vertical: Spacing.xs),
               decoration: BoxDecoration(
-                color: AppColors.primaryAlt.withValues(alpha: 0.1),
+                color: context.cp.primaryAlt.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(Dimensions.radiusFull),
               ),
-              child: Text(memory.category, style: AppTextStyles.caption.copyWith(color: AppColors.primaryAlt)),
+              child: Text(memory.category, style: AppTextStyles.caption.copyWith(color: context.cp.primaryAlt)),
             ),
             const SizedBox(height: Spacing.lg),
             Text(memory.title, style: AppTextStyles.displaySmall),
@@ -46,7 +46,7 @@ class MemoryDetailScreen extends StatelessWidget {
                 runSpacing: Spacing.sm,
                 children: memory.tags.map((tag) => Container(
                   padding: const EdgeInsets.symmetric(horizontal: Spacing.md, vertical: Spacing.xs),
-                  decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(Dimensions.radiusFull)),
+                  decoration: BoxDecoration(color: context.cp.surface, borderRadius: BorderRadius.circular(Dimensions.radiusFull)),
                   child: Text('#$tag', style: AppTextStyles.labelSmall),
                 )).toList(),
               ),

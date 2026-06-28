@@ -73,7 +73,7 @@ class ReminderListScreen extends StatelessWidget {
                 ),
               ),
             ],
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            SliverToBoxAdapter(child: SizedBox(height: Spacing.lg)),
           ],
         ),
       ),

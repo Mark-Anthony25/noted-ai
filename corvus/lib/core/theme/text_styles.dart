@@ -5,21 +5,22 @@ import 'package:corvus/core/constants/colors.dart';
 class AppTextStyles {
   AppTextStyles._();
 
-  static TextStyle get _inter => GoogleFonts.inter(letterSpacing: -0.01);
+  static TextStyle get _inter => GoogleFonts.inter();
 
   // ── Base styles (no color — applied via textTheme factory) ──────────────
+  // Claude-inspired: understated headings, clean readable body, relaxed spacing
 
-  static TextStyle get displayLarge => _inter.copyWith(fontSize: 36, fontWeight: FontWeight.w600, height: 1.15);
+  static TextStyle get displayLarge => _inter.copyWith(fontSize: 34, fontWeight: FontWeight.w500, height: 1.2);
 
-  static TextStyle get displayMedium => _inter.copyWith(fontSize: 30, fontWeight: FontWeight.w600, height: 1.2);
+  static TextStyle get displayMedium => _inter.copyWith(fontSize: 28, fontWeight: FontWeight.w500, height: 1.25);
 
-  static TextStyle get displaySmall => _inter.copyWith(fontSize: 26, fontWeight: FontWeight.w600, height: 1.25);
+  static TextStyle get displaySmall => _inter.copyWith(fontSize: 24, fontWeight: FontWeight.w500, height: 1.3);
 
-  static TextStyle get headlineLarge => _inter.copyWith(fontSize: 22, fontWeight: FontWeight.w600, height: 1.3);
+  static TextStyle get headlineLarge => _inter.copyWith(fontSize: 20, fontWeight: FontWeight.w500, height: 1.35);
 
-  static TextStyle get headlineMedium => _inter.copyWith(fontSize: 18, fontWeight: FontWeight.w600, height: 1.35);
+  static TextStyle get headlineMedium => _inter.copyWith(fontSize: 17, fontWeight: FontWeight.w500, height: 1.4);
 
-  static TextStyle get headlineSmall => _inter.copyWith(fontSize: 17, fontWeight: FontWeight.w500, height: 1.4);
+  static TextStyle get headlineSmall => _inter.copyWith(fontSize: 16, fontWeight: FontWeight.w500, height: 1.4);
 
   static TextStyle get titleLarge => _inter.copyWith(fontSize: 15, fontWeight: FontWeight.w500, height: 1.4);
 
@@ -27,11 +28,11 @@ class AppTextStyles {
 
   static TextStyle get titleSmall => _inter.copyWith(fontSize: 13, fontWeight: FontWeight.w500, height: 1.4);
 
-  static TextStyle get bodyLarge => _inter.copyWith(fontSize: 15, fontWeight: FontWeight.w400, height: 1.65);
+  static TextStyle get bodyLarge => _inter.copyWith(fontSize: 15, fontWeight: FontWeight.w400, height: 1.7);
 
-  static TextStyle get bodyMedium => _inter.copyWith(fontSize: 14, fontWeight: FontWeight.w400, height: 1.6);
+  static TextStyle get bodyMedium => _inter.copyWith(fontSize: 14, fontWeight: FontWeight.w400, height: 1.65);
 
-  static TextStyle get bodySmall => _inter.copyWith(fontSize: 12, fontWeight: FontWeight.w400, height: 1.5);
+  static TextStyle get bodySmall => _inter.copyWith(fontSize: 13, fontWeight: FontWeight.w400, height: 1.55);
 
   static TextStyle get labelLarge => _inter.copyWith(fontSize: 13, fontWeight: FontWeight.w500, height: 1.4);
 
@@ -39,19 +40,21 @@ class AppTextStyles {
 
   static TextStyle get labelSmall => _inter.copyWith(fontSize: 11, fontWeight: FontWeight.w400, height: 1.4);
 
-  static TextStyle get button => _inter.copyWith(fontSize: 14, fontWeight: FontWeight.w500, height: 1.4, letterSpacing: 0.2);
+  static TextStyle get button => _inter.copyWith(fontSize: 14, fontWeight: FontWeight.w500, height: 1.4);
 
   static TextStyle get buttonSmall => _inter.copyWith(fontSize: 12, fontWeight: FontWeight.w500, height: 1.4);
 
   static TextStyle get caption => _inter.copyWith(fontSize: 11, fontWeight: FontWeight.w400, height: 1.4);
 
-  static TextStyle get chatMessage => _inter.copyWith(fontSize: 14, fontWeight: FontWeight.w400, height: 1.6);
+  // Claude chat message style: clean, readable, comfortable line-height
+  static TextStyle get chatMessage => _inter.copyWith(fontSize: 14, fontWeight: FontWeight.w400, height: 1.7);
 
-  static TextStyle get chatTime => _inter.copyWith(fontSize: 11, fontWeight: FontWeight.w400, height: 1.4);
+  // Claude sidebar time style: smaller, muted
+  static TextStyle get chatTime => _inter.copyWith(fontSize: 12, fontWeight: FontWeight.w400, height: 1.4);
 
-  static TextStyle get timeAgo => _inter.copyWith(fontSize: 11, fontWeight: FontWeight.w400, height: 1.4);
+  static TextStyle get timeAgo => _inter.copyWith(fontSize: 12, fontWeight: FontWeight.w400, height: 1.4);
 
-  static TextStyle get amount => _inter.copyWith(fontSize: 22, fontWeight: FontWeight.w600, height: 1.2);
+  static TextStyle get amount => _inter.copyWith(fontSize: 22, fontWeight: FontWeight.w500, height: 1.2);
 
   // ── Factory: create a TextTheme from a brightness-aware palette ──────────
 

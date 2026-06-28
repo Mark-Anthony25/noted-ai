@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:corvus/core/constants/colors.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 label: 'Full Name',
                 hintText: 'Alex Chen',
                 controller: _nameController,
-                prefixIcon: const Icon(LucideIcons.user, size: 16, color: AppColors.textTertiary),
+                prefixIcon: Icon(LucideIcons.user, size: 16, color: context.cp.textTertiary),
               ),
               const SizedBox(height: Spacing.xl),
               CorvusTextField(
@@ -55,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'alex@corvus.app',
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(LucideIcons.mail, size: 16, color: AppColors.textTertiary),
+                prefixIcon: Icon(LucideIcons.mail, size: 16, color: context.cp.textTertiary),
               ),
               const SizedBox(height: Spacing.xl),
               CorvusTextField(
@@ -63,9 +63,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'Create a strong password',
                 controller: _passwordController,
                 isPassword: _obscurePassword,
-                prefixIcon: const Icon(LucideIcons.lock, size: 16, color: AppColors.textTertiary),
+                prefixIcon: Icon(LucideIcons.lock, size: 16, color: context.cp.textTertiary),
                 suffixIcon: IconButton(
-                  icon: Icon(_obscurePassword ? LucideIcons.eyeOff : LucideIcons.eye, size: 16, color: AppColors.textTertiary),
+                  icon: Icon(_obscurePassword ? LucideIcons.eyeOff : LucideIcons.eye, size: 16, color: context.cp.textTertiary),
                   onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                 ),
                 helperText: 'Must be at least 8 characters',
@@ -94,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Text('Already have an account? ', style: AppTextStyles.bodyMedium),
                   GestureDetector(
                     onTap: () => context.go('/sign-in'),
-                    child: Text('Sign In', style: AppTextStyles.labelLarge.copyWith(color: AppColors.primary)),
+                    child: Text('Sign In', style: AppTextStyles.labelLarge.copyWith(color: context.cp.primary)),
                   ),
                 ],
               ),
@@ -117,9 +117,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 16, color: AppColors.textSecondary),
+            Icon(icon, size: 16, color: context.cp.textSecondary),
             const SizedBox(width: Spacing.sm),
-            Text(label, style: AppTextStyles.button.copyWith(color: AppColors.textPrimary)),
+            Text(label, style: AppTextStyles.button.copyWith(color: context.cp.textPrimary)),
           ],
         ),
       ),

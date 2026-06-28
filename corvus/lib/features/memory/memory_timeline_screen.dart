@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/shared/widgets/memory_card.dart';
@@ -32,9 +32,9 @@ class MemoryTimelineScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Text(DateFormat('MMMM d, yyyy').format(memory.timestamp),
-                      style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
+                      style: AppTextStyles.titleMedium.copyWith(color: context.cp.primary)),
                   const SizedBox(width: Spacing.sm),
-                  Expanded(child: Container(height: 1, color: AppColors.divider)),
+                  Expanded(child: Container(height: 1, color: context.cp.divider)),
                 ],
               ),
             );

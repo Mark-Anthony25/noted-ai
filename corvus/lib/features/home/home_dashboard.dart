@@ -89,7 +89,7 @@ class HomeDashboard extends StatelessWidget {
                 ),
               ),
             ],
-            const SliverToBoxAdapter(child: SizedBox(height: Spacing.section)),
+            SliverToBoxAdapter(child: SizedBox(height: Spacing.lg)),
           ],
         ),
       ),

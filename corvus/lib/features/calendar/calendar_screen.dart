@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:corvus/shared/widgets/schedule_card.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
@@ -45,7 +45,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: const Icon(LucideIcons.chevronLeft, color: AppColors.textPrimary),
+                      icon: Icon(LucideIcons.chevronLeft, color: context.cp.textPrimary),
                       onPressed: () {},
                     ),
                     Text(
@@ -53,7 +53,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       style: AppTextStyles.titleLarge,
                     ),
                     IconButton(
-                      icon: const Icon(LucideIcons.chevronRight, color: AppColors.textPrimary),
+                      icon: Icon(LucideIcons.chevronRight, color: context.cp.textPrimary),
                       onPressed: () {},
                     ),
                   ],
@@ -86,9 +86,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         margin: const EdgeInsets.all(2),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? AppColors.primary
+                              ? context.cp.primary
                               : isToday
-                                  ? AppColors.primary.withValues(alpha: 0.15)
+                                  ? context.cp.primary.withValues(alpha: 0.15)
                                   : null,
                           shape: BoxShape.circle,
                         ),
@@ -97,10 +97,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             day.toString(),
                             style: AppTextStyles.titleSmall.copyWith(
                               color: isSelected
-                                  ? AppColors.textOnPrimary
+                                  ? context.cp.textOnPrimary
                                   : isToday
-                                      ? AppColors.primary
-                                      : AppColors.textPrimary,
+                                      ? context.cp.primary
+                                      : context.cp.textPrimary,
                               fontWeight: isToday ? FontWeight.w600 : null,
                             ),
                           ),
@@ -147,7 +147,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   childCount: dayEvents.length,
                 ),
               ),
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            SliverToBoxAdapter(child: SizedBox(height: Spacing.lg)),
           ],
         ),
       ),

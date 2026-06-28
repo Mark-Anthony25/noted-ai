@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/constants/placeholder_data.dart';
@@ -22,18 +22,18 @@ class NoteDetailScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back, color: context.cp.textPrimary),
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
           IconButton(
             icon: const Icon(LucideIcons.pin, size: 20),
-            color: note.isPinned ? AppColors.primary : AppColors.textSecondary,
+            color: note.isPinned ? context.cp.primary : context.cp.textSecondary,
             onPressed: () {},
           ),
           IconButton(
             icon: const Icon(LucideIcons.moreHorizontal, size: 20),
-            color: AppColors.textSecondary,
+            color: context.cp.textSecondary,
             onPressed: () {},
           ),
         ],
@@ -47,7 +47,7 @@ class NoteDetailScreen extends StatelessWidget {
             const SizedBox(height: Spacing.md),
             Row(
               children: [
-                const Icon(LucideIcons.clock, size: 12, color: AppColors.textTertiary),
+                Icon(LucideIcons.clock, size: 12, color: context.cp.textTertiary),
                 const SizedBox(width: Spacing.xs),
                 Text(
                   '${note.updatedAt.month}/${note.updatedAt.day}/${note.updatedAt.year}',
@@ -60,12 +60,12 @@ class NoteDetailScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: Spacing.sm, vertical: Spacing.xxs),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.1),
+                        color: context.cp.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(Dimensions.radiusFull),
                       ),
                       child: Text(
                         '#$tag',
-                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary),
+                        style: AppTextStyles.labelSmall.copyWith(color: context.cp.primary),
                       ),
                     ),
                   )),
@@ -75,7 +75,7 @@ class NoteDetailScreen extends StatelessWidget {
             Text(
               note.content,
               style: AppTextStyles.bodyLarge.copyWith(
-                color: AppColors.textPrimary,
+                color: context.cp.textPrimary,
                 height: 1.8,
               ),
             ),

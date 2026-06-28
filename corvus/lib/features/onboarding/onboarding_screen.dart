@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:corvus/core/constants/colors.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
@@ -43,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Text(
                       'Skip',
                       style: AppTextStyles.labelLarge.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.cp.textSecondary,
                       ),
                     ),
                   ),
@@ -75,7 +75,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Text(
                           slide.description,
                           style: AppTextStyles.bodyLarge.copyWith(
-                            color: AppColors.textSecondary,
+                            color: context.cp.textSecondary,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -128,7 +128,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       height: 8,
       margin: const EdgeInsets.symmetric(horizontal: Spacing.xs),
       decoration: BoxDecoration(
-        color: isActive ? AppColors.primary : AppColors.textTertiary,
+        color: isActive ? context.cp.primary : context.cp.textTertiary,
         borderRadius: BorderRadius.circular(Dimensions.radiusFull),
       ),
     );
@@ -154,10 +154,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       width: 100,
       height: 100,
       decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.1),
+        color: context.cp.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Icon(icon, size: 44, color: AppColors.primary),
+      child: Icon(icon, size: 44, color: context.cp.primary),
     );
   }
 }

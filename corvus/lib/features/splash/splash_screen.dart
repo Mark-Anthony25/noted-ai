@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/spacing.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -72,19 +72,19 @@ class _SplashScreenState extends State<SplashScreen>
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primaryAlt]),
+                        gradient: LinearGradient(colors: [context.cp.primary, context.cp.primaryAlt]),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.3),
+                            color: context.cp.primary.withValues(alpha: 0.3),
                             blurRadius: 24,
                             offset: const Offset(0, 8),
                           ),
                         ],
                       ),
-                      child: const Icon(
+                      child: Icon(
                         LucideIcons.sparkles,
-                        color: AppColors.textOnPrimary,
+                        color: context.cp.textOnPrimary,
                         size: 36,
                       ),
                     ),
@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen>
                     Text(
                       'Your AI memory companion',
                       style: AppTextStyles.bodyLarge.copyWith(
-                        color: AppColors.textSecondary,
+                        color: context.cp.textSecondary,
                       ),
                     ),
                   ],

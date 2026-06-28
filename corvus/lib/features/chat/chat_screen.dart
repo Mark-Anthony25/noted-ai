@@ -57,7 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
-              padding: const EdgeInsets.fromLTRB(0, Spacing.md, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, Spacing.md, 0, Spacing.md),
               itemCount: messages.length,
               itemBuilder: (context, index) => ChatBubble(message: messages[index]),
             ),
@@ -92,9 +92,13 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildInputBar() {
+    final bottomInset = MediaQuery.of(context).padding.bottom;
     return Container(
-      padding: EdgeInsets.fromLTRB(Spacing.lg, Spacing.sm, Spacing.lg, Spacing.sm + MediaQuery.of(context).padding.bottom),
-      color: context.cp.background,
+      padding: EdgeInsets.fromLTRB(Spacing.lg, Spacing.sm, Spacing.lg, Spacing.sm + bottomInset),
+      decoration: BoxDecoration(
+        color: context.cp.background,
+        border: Border(top: BorderSide(color: context.cp.divider)),
+      ),
       child: Row(
         children: [
           Expanded(
@@ -126,13 +130,13 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           const SizedBox(width: Spacing.sm),
           Container(
-            width: 36,
-            height: 36,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
               color: context.cp.primary.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(Dimensions.radiusSm),
             ),
-            child: Icon(LucideIcons.arrowUp, size: 16, color: context.cp.primary),
+            child: Icon(LucideIcons.arrowUp, size: 18, color: context.cp.primary),
           ),
         ],
       ),

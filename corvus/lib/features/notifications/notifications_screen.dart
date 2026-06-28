@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +20,7 @@ class NotificationsScreen extends StatelessWidget {
             onPressed: () {},
             child: Text(
               'Mark all read',
-              style: AppTextStyles.labelMedium.copyWith(color: AppColors.primary),
+              style: AppTextStyles.labelMedium.copyWith(color: context.cp.primary),
             ),
           ),
         ],
@@ -34,7 +34,7 @@ class NotificationsScreen extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(Spacing.lg),
             decoration: BoxDecoration(
-              color: n.isRead ? AppColors.background : AppColors.surface,
+              color: n.isRead ? context.cp.background : context.cp.surface,
               borderRadius: BorderRadius.circular(Dimensions.radiusSm),
             ),
             child: Row(
@@ -45,7 +45,7 @@ class NotificationsScreen extends StatelessWidget {
                   height: 6,
                   margin: const EdgeInsets.only(top: 6),
                   decoration: BoxDecoration(
-                    color: n.isRead ? Colors.transparent : AppColors.primary,
+                    color: n.isRead ? Colors.transparent : context.cp.primary,
                     shape: BoxShape.circle,
                   ),
                 ),

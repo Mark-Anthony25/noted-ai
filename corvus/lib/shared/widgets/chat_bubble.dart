@@ -48,16 +48,14 @@ class ChatBubble extends StatelessWidget {
                   Text(
                     message.content,
                     style: AppTextStyles.chatMessage.copyWith(
-                      color: isUser ? context.cp.textOnPrimary : context.cp.textPrimary,
+                      color: context.cp.textPrimary,
                     ),
                   ),
                   const SizedBox(height: Spacing.xxs),
                   Text(
                     _formatTime(message.timestamp),
                     style: AppTextStyles.chatTime.copyWith(
-                      color: isUser
-                          ? context.cp.textOnPrimary.withValues(alpha: 0.5)
-                          : context.cp.textTertiary,
+                      color: context.cp.textTertiary,
                     ),
                   ),
                 ],

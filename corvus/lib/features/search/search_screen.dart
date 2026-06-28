@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:corvus/core/constants/colors.dart';
+import 'package:corvus/core/theme/context_colors.dart';
 import 'package:corvus/core/constants/dimensions.dart';
 import 'package:corvus/core/constants/spacing.dart';
 import 'package:corvus/core/theme/text_styles.dart';
@@ -31,13 +31,13 @@ class SearchScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
               child: Row(
                 children: [
-                  _filterChip('All', true),
+                  _filterChip(context, 'All', true),
                   const SizedBox(width: Spacing.sm),
-                  _filterChip('Notes', false),
+                  _filterChip(context, 'Notes', false),
                   const SizedBox(width: Spacing.sm),
-                  _filterChip('Memories', false),
+                  _filterChip(context, 'Memories', false),
                   const SizedBox(width: Spacing.sm),
-                  _filterChip('Reminders', false),
+                  _filterChip(context, 'Reminders', false),
                 ],
               ),
             ),
@@ -50,7 +50,7 @@ class SearchScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(LucideIcons.clock, size: 16, color: AppColors.textTertiary),
+                        Icon(LucideIcons.clock, size: 16, color: context.cp.textTertiary),
                         const SizedBox(width: Spacing.sm),
                         Text('Recent Searches', style: AppTextStyles.titleMedium),
                       ],
@@ -61,11 +61,11 @@ class SearchScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: Spacing.md),
                         child: Row(
                           children: [
-                            const Icon(LucideIcons.search, size: 16, color: AppColors.textTertiary),
+                            Icon(LucideIcons.search, size: 16, color: context.cp.textTertiary),
                             const SizedBox(width: Spacing.md),
                             Text(query, style: AppTextStyles.bodyMedium),
                             const Spacer(),
-                            const Icon(LucideIcons.arrowUpRight, size: 14, color: AppColors.textTertiary),
+                            Icon(LucideIcons.arrowUpRight, size: 14, color: context.cp.textTertiary),
                           ],
                         ),
                       ),
@@ -98,17 +98,17 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  Widget _filterChip(String label, bool isSelected) {
+  Widget _filterChip(BuildContext context, String label, bool isSelected) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: Spacing.lg, vertical: Spacing.sm),
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.primary : AppColors.surfaceVariant,
+        color: isSelected ? context.cp.primary : context.cp.surfaceVariant,
         borderRadius: BorderRadius.circular(Dimensions.radiusFull),
       ),
       child: Text(
         label,
         style: AppTextStyles.labelMedium.copyWith(
-          color: isSelected ? AppColors.textOnPrimary : AppColors.textSecondary,
+          color: isSelected ? context.cp.textOnPrimary : context.cp.textSecondary,
         ),
       ),
     );

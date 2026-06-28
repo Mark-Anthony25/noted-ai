@@ -1,0 +1,3 @@
+# noted-ai
+
+first commit
